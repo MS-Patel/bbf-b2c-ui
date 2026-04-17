@@ -23,6 +23,9 @@ import { Route as AppInvestorTransactionsRouteImport } from './routes/app.invest
 import { Route as AppInvestorProfileRouteImport } from './routes/app.investor.profile'
 import { Route as AppInvestorPortfolioRouteImport } from './routes/app.investor.portfolio'
 import { Route as AppInvestorExploreRouteImport } from './routes/app.investor.explore'
+import { Route as AppInvestorOrdersSwitchRouteImport } from './routes/app.investor.orders.switch'
+import { Route as AppInvestorOrdersSipRouteImport } from './routes/app.investor.orders.sip'
+import { Route as AppInvestorOrdersRedeemRouteImport } from './routes/app.investor.orders.redeem'
 import { Route as AppInvestorOrdersLumpsumRouteImport } from './routes/app.investor.orders.lumpsum'
 
 const LoginRoute = LoginRouteImport.update({
@@ -95,6 +98,21 @@ const AppInvestorExploreRoute = AppInvestorExploreRouteImport.update({
   path: '/investor/explore',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInvestorOrdersSwitchRoute = AppInvestorOrdersSwitchRouteImport.update({
+  id: '/investor/orders/switch',
+  path: '/investor/orders/switch',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInvestorOrdersSipRoute = AppInvestorOrdersSipRouteImport.update({
+  id: '/investor/orders/sip',
+  path: '/investor/orders/sip',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInvestorOrdersRedeemRoute = AppInvestorOrdersRedeemRouteImport.update({
+  id: '/investor/orders/redeem',
+  path: '/investor/orders/redeem',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInvestorOrdersLumpsumRoute =
   AppInvestorOrdersLumpsumRouteImport.update({
     id: '/investor/orders/lumpsum',
@@ -118,6 +136,9 @@ export interface FileRoutesByFullPath {
   '/app/investor/': typeof AppInvestorIndexRoute
   '/app/rm/': typeof AppRmIndexRoute
   '/app/investor/orders/lumpsum': typeof AppInvestorOrdersLumpsumRoute
+  '/app/investor/orders/redeem': typeof AppInvestorOrdersRedeemRoute
+  '/app/investor/orders/sip': typeof AppInvestorOrdersSipRoute
+  '/app/investor/orders/switch': typeof AppInvestorOrdersSwitchRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -135,6 +156,9 @@ export interface FileRoutesByTo {
   '/app/investor': typeof AppInvestorIndexRoute
   '/app/rm': typeof AppRmIndexRoute
   '/app/investor/orders/lumpsum': typeof AppInvestorOrdersLumpsumRoute
+  '/app/investor/orders/redeem': typeof AppInvestorOrdersRedeemRoute
+  '/app/investor/orders/sip': typeof AppInvestorOrdersSipRoute
+  '/app/investor/orders/switch': typeof AppInvestorOrdersSwitchRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -153,6 +177,9 @@ export interface FileRoutesById {
   '/app/investor/': typeof AppInvestorIndexRoute
   '/app/rm/': typeof AppRmIndexRoute
   '/app/investor/orders/lumpsum': typeof AppInvestorOrdersLumpsumRoute
+  '/app/investor/orders/redeem': typeof AppInvestorOrdersRedeemRoute
+  '/app/investor/orders/sip': typeof AppInvestorOrdersSipRoute
+  '/app/investor/orders/switch': typeof AppInvestorOrdersSwitchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -172,6 +199,9 @@ export interface FileRouteTypes {
     | '/app/investor/'
     | '/app/rm/'
     | '/app/investor/orders/lumpsum'
+    | '/app/investor/orders/redeem'
+    | '/app/investor/orders/sip'
+    | '/app/investor/orders/switch'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -189,6 +219,9 @@ export interface FileRouteTypes {
     | '/app/investor'
     | '/app/rm'
     | '/app/investor/orders/lumpsum'
+    | '/app/investor/orders/redeem'
+    | '/app/investor/orders/sip'
+    | '/app/investor/orders/switch'
   id:
     | '__root__'
     | '/'
@@ -206,6 +239,9 @@ export interface FileRouteTypes {
     | '/app/investor/'
     | '/app/rm/'
     | '/app/investor/orders/lumpsum'
+    | '/app/investor/orders/redeem'
+    | '/app/investor/orders/sip'
+    | '/app/investor/orders/switch'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -315,6 +351,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInvestorExploreRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/investor/orders/switch': {
+      id: '/app/investor/orders/switch'
+      path: '/investor/orders/switch'
+      fullPath: '/app/investor/orders/switch'
+      preLoaderRoute: typeof AppInvestorOrdersSwitchRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/investor/orders/sip': {
+      id: '/app/investor/orders/sip'
+      path: '/investor/orders/sip'
+      fullPath: '/app/investor/orders/sip'
+      preLoaderRoute: typeof AppInvestorOrdersSipRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/investor/orders/redeem': {
+      id: '/app/investor/orders/redeem'
+      path: '/investor/orders/redeem'
+      fullPath: '/app/investor/orders/redeem'
+      preLoaderRoute: typeof AppInvestorOrdersRedeemRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/investor/orders/lumpsum': {
       id: '/app/investor/orders/lumpsum'
       path: '/investor/orders/lumpsum'
@@ -337,6 +394,9 @@ interface AppRouteChildren {
   AppInvestorIndexRoute: typeof AppInvestorIndexRoute
   AppRmIndexRoute: typeof AppRmIndexRoute
   AppInvestorOrdersLumpsumRoute: typeof AppInvestorOrdersLumpsumRoute
+  AppInvestorOrdersRedeemRoute: typeof AppInvestorOrdersRedeemRoute
+  AppInvestorOrdersSipRoute: typeof AppInvestorOrdersSipRoute
+  AppInvestorOrdersSwitchRoute: typeof AppInvestorOrdersSwitchRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -351,6 +411,9 @@ const AppRouteChildren: AppRouteChildren = {
   AppInvestorIndexRoute: AppInvestorIndexRoute,
   AppRmIndexRoute: AppRmIndexRoute,
   AppInvestorOrdersLumpsumRoute: AppInvestorOrdersLumpsumRoute,
+  AppInvestorOrdersRedeemRoute: AppInvestorOrdersRedeemRoute,
+  AppInvestorOrdersSipRoute: AppInvestorOrdersSipRoute,
+  AppInvestorOrdersSwitchRoute: AppInvestorOrdersSwitchRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
