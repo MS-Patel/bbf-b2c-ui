@@ -18,13 +18,8 @@ export const Route = createFileRoute("/app")({
       });
     }
   },
-  component: AppLayout,
+  component: AppShell,
 });
 
-function AppLayout() {
-  return (
-    <AppShell>
-      <Outlet />
-    </AppShell>
-  );
-}
+// Outlet is rendered inside AppShell.
+void Outlet;
