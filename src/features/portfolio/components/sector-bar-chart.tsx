@@ -1,22 +1,18 @@
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  type TooltipProps,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { SectorAllocation } from "@/types/portfolio";
 
 interface SectorBarChartProps {
   data: SectorAllocation[];
 }
 
-function SectorTooltip({ active, payload }: TooltipProps<number, string>) {
+interface RechartsTooltipPayload {
+  active?: boolean;
+  payload?: Array<{ payload: SectorAllocation }>;
+}
+
+function SectorTooltip({ active, payload }: RechartsTooltipPayload) {
   if (!active || !payload?.length) return null;
-  const item = payload[0].payload as SectorAllocation;
+  const item = payload[0].payload;
   return (
     <div className="rounded-lg border border-border bg-popover px-3 py-2 text-xs shadow-elegant">
       <p className="font-semibold text-popover-foreground">{item.sector}</p>

@@ -6,7 +6,6 @@ import {
   Line,
   ResponsiveContainer,
   Tooltip,
-  type TooltipProps,
   XAxis,
   YAxis,
 } from "recharts";
@@ -18,7 +17,13 @@ interface PerformanceChartProps {
   height?: number;
 }
 
-function PerfTooltip({ active, payload, label }: TooltipProps<number, string>) {
+interface RechartsTooltipPayload {
+  active?: boolean;
+  payload?: Array<{ value?: number | string; dataKey?: string | number }>;
+  label?: string | number;
+}
+
+function PerfTooltip({ active, payload, label }: RechartsTooltipPayload) {
   if (!active || !payload?.length) return null;
   const value = payload.find((p) => p.dataKey === "value")?.value ?? 0;
   const invested = payload.find((p) => p.dataKey === "invested")?.value ?? 0;

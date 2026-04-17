@@ -1,14 +1,13 @@
 import { useMemo } from "react";
-import {
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-  type TooltipProps,
-} from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import type { AllocationSlice } from "@/types/portfolio";
 import { formatCompactINR } from "@/lib/format";
+
+interface RechartsTooltipPayload<T> {
+  active?: boolean;
+  payload?: Array<{ payload: T; value?: number; dataKey?: string | number }>;
+  label?: string | number;
+}
 
 const PALETTE = [
   "var(--color-chart-1)",
@@ -25,9 +24,9 @@ interface AllocationDonutProps {
   centerValue?: string;
 }
 
-function ChartTooltip({ active, payload }: TooltipProps<number, string>) {
+function ChartTooltip({ active, payload }: RechartsTooltipPayload<AllocationSlice>) {
   if (!active || !payload?.length) return null;
-  const item = payload[0].payload as AllocationSlice;
+  const item = payload[0].payload;
   return (
     <div className="rounded-lg border border-border bg-popover px-3 py-2 text-xs shadow-elegant">
       <p className="font-semibold text-popover-foreground">{item.label}</p>
