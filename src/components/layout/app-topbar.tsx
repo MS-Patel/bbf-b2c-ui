@@ -1,5 +1,5 @@
-import { useNavigate } from "@tanstack/react-router";
-import { Bell, LogOut, Moon, Search, Sun, User as UserIcon } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { LogOut, Moon, Search, Settings, Sun, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,6 +16,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useUiStore } from "@/stores/ui-store";
 import { useLogoutMutation } from "@/features/auth/api";
 import { ROLE_LABEL } from "@/features/auth/role-routes";
+import { NotificationsBell } from "@/features/notifications/notifications-bell";
 import { toast } from "sonner";
 
 function initialsOf(name: string): string {
@@ -63,10 +64,7 @@ export function AppTopbar() {
           {theme === "dark" ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
         </Button>
 
-        <Button variant="ghost" size="icon" className="relative" aria-label="Notifications">
-          <Bell className="h-4.5 w-4.5" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-accent shadow-glow" />
-        </Button>
+        <NotificationsBell />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -93,9 +91,17 @@ export function AppTopbar() {
               </Badge>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <UserIcon className="mr-2 h-4 w-4" />
-              Profile
+            <DropdownMenuItem asChild>
+              <Link to="/app/settings" className="cursor-pointer">
+                <UserIcon className="mr-2 h-4 w-4" />
+                Profile & settings
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link to="/app/settings" className="cursor-pointer">
+                <Settings className="mr-2 h-4 w-4" />
+                Preferences
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
