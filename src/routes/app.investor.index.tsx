@@ -9,6 +9,7 @@ import { AllocationDonut } from "@/features/portfolio/components/allocation-donu
 import { PerformanceChart } from "@/features/portfolio/components/performance-chart";
 import { usePortfolioOverviewQuery } from "@/features/portfolio/api";
 import { useAuthStore } from "@/stores/auth-store";
+import { useImpersonationStore } from "@/features/impersonation/store";
 import { ROLE_HOME } from "@/features/auth/role-routes";
 import { formatCompactINR, formatINR, formatPercent } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -17,7 +18,9 @@ import type { PortfolioSummary } from "@/types/portfolio";
 export const Route = createFileRoute("/app/investor/")({
   beforeLoad: () => {
     const { user } = useAuthStore.getState();
-    if (user && user.role !== "investor") throw redirect({ to: ROLE_HOME[user.role] });
+    const impersonating = useImpersonationStore.getState().client;
+    // Allow RM/Distributor through when impersonating an investor
+    if (user && user.role !== "investor" && !impersonating) throw redirect({ to: ROLE_HOME[user.role] });
   },
   head: () => ({ meta: [{ title: "Investor dashboard — WealthOS" }] }),
   component: InvestorDashboard,
@@ -25,25 +28,30 @@ export const Route = createFileRoute("/app/investor/")({
 
 function InvestorDashboard() {
   const user = useAuthStore((s) => s.user);
+  const impersonating = useImpersonationStore((s) => s.client);
   const { data, isLoading } = usePortfolioOverviewQuery();
+  const displayName = impersonating?.fullName ?? user?.fullName ?? "Investor";
+  const readOnly = !!impersonating;
 
   return (
     <>
       <PageHeader
-        eyebrow={`Welcome back, ${user?.fullName.split(" ")[0] ?? "Investor"}`}
+        eyebrow={readOnly ? `Read-only · ${displayName}` : `Welcome back, ${displayName.split(" ")[0]}`}
         title="Your wealth, at a glance"
         description="Track holdings, run SIPs, and execute orders on BSE Star MF — all in one place."
         actions={
-          <>
-            <Button asChild variant="outline">
-              <Link to="/app/investor/explore">Explore funds</Link>
-            </Button>
-            <Button asChild className="gap-2">
-              <Link to="/app/investor/orders/lumpsum">
-                Invest now <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </>
+          readOnly ? null : (
+            <>
+              <Button asChild variant="outline">
+                <Link to="/app/investor/explore">Explore funds</Link>
+              </Button>
+              <Button asChild className="gap-2">
+                <Link to="/app/investor/orders/lumpsum">
+                  Invest now <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </>
+          )
         }
       />
       <div className="space-y-6 px-6 py-6 sm:px-8">
