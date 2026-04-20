@@ -244,6 +244,13 @@
   .gradient-brand { background-image: var(--gradient-brand); }
   .gradient-accent { background-image: var(--gradient-accent); }
   .gradient-surface { background-image: var(--gradient-surface); }
+  .gradient-hero { background-image: var(--gradient-hero); }
+  .gradient-text-brand {
+    background-image: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .shadow-elegant { box-shadow: var(--shadow-elegant); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
   .shadow-card { box-shadow: var(--shadow-card); }
