@@ -16,7 +16,7 @@ export function BrandLogo({ className, collapsed = false, to = "/" }: BrandLogoP
       </span>
       {!collapsed && (
         <span className="flex flex-col leading-none">
-          <span className="text-base font-bold tracking-tight">WealthOS</span>
+          <span className="text-base font-bold tracking-tight">BuyBestFin</span>
           <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
             Mutual Funds
           </span>

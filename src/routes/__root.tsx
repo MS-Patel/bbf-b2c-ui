@@ -42,14 +42,14 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "WealthOS — Mutual Fund & Wealth Platform" },
+      { title: "BuyBestFin — Mutual Fund & Wealth Platform" },
       {
         name: "description",
         content:
-          "WealthOS is a unified mutual-fund and wealth-management platform for investors, RMs, distributors, and operations teams.",
+          "BuyBestFin is a unified mutual-fund and wealth-management platform for investors, RMs, distributors, and operations teams.",
       },
-      { name: "author", content: "WealthOS" },
-      { property: "og:title", content: "WealthOS — Mutual Fund & Wealth Platform" },
+      { name: "author", content: "BuyBestFin" },
+      { property: "og:title", content: "BuyBestFin — Mutual Fund & Wealth Platform" },
       { property: "og:description", content: "Modern mutual-fund operations for the entire value chain." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
