@@ -188,7 +188,7 @@ function HoldingDetailPage() {
                           borderRadius: "8px",
                           fontSize: "12px",
                         }}
-                        formatter={(value: number) => [`₹${value.toFixed(2)}`, "NAV"]}
+                        formatter={(value) => [`₹${Number(value).toFixed(2)}`, "NAV"]}
                         labelFormatter={(label) =>
                           new Date(label as string).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })
                         }
