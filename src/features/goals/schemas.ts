@@ -18,17 +18,17 @@ export const goalWizardSchema = z.object({
   category: goalCategorySchema,
   priority: goalPrioritySchema,
   targetAmount: z
-    .number({ invalid_type_error: "Target amount required" })
+    .number({ error: "Target amount required" })
     .min(10000, "Minimum ₹10,000"),
   targetDate: z.string().min(1, "Target date required").refine(
     (d) => +new Date(d) > Date.now() + 30 * 86400_000,
     "Target must be at least 30 days away",
   ),
   monthlyContribution: z
-    .number({ invalid_type_error: "Monthly contribution required" })
+    .number({ error: "Monthly contribution required" })
     .min(0, "Cannot be negative"),
   expectedReturnPct: z
-    .number({ invalid_type_error: "Expected return required" })
+    .number({ error: "Expected return required" })
     .min(1, "Min 1%")
     .max(30, "Max 30%"),
 });

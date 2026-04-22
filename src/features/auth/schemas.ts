@@ -38,9 +38,7 @@ export const signupSchema = z
       .regex(/^[+0-9 -]+$/, "Digits only"),
     password: z.string().min(8, "Use at least 8 characters"),
     confirmPassword: z.string(),
-    agreeTerms: z.literal(true, {
-      errorMap: () => ({ message: "You must agree to continue" }),
-    }),
+    agreeTerms: z.literal(true, { error: "You must agree to continue" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

@@ -21,7 +21,7 @@ export const addNomineeSchema = z.object({
   relation: z.string().min(2, "Relation is required"),
   dob: z.string().min(1, "Date of birth is required"),
   sharePct: z
-    .number({ invalid_type_error: "Share is required" })
+    .number({ error: "Share is required" })
     .int("Whole numbers only")
     .min(1, "Min 1%")
     .max(100, "Max 100%"),
