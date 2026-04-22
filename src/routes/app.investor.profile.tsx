@@ -1,6 +1,6 @@
+import { useMemo, useState } from "react";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { CreditCard, Mail, MapPin, Phone, Plus, ShieldCheck, UserPlus } from "lucide-react";
-import { toast } from "sonner";
 import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,12 +9,14 @@ import { Badge } from "@/components/ui/badge";
 import { StatusBadge, type StatusTone } from "@/components/feedback/status-badge";
 import { ChartSkeleton } from "@/components/feedback/skeletons";
 import { KycTimeline } from "@/features/kyc/components/kyc-timeline";
+import { AddBankDialog } from "@/features/kyc/components/add-bank-dialog";
+import { AddNomineeDialog } from "@/features/kyc/components/add-nominee-dialog";
 import { useKycOverviewQuery } from "@/features/kyc/api";
 import { useAuthStore } from "@/stores/auth-store";
 import { ROLE_HOME } from "@/features/auth/role-routes";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import type { KycOverallStatus } from "@/types/kyc";
+import type { BankAccount, KycOverallStatus, Nominee } from "@/types/kyc";
 
 export const Route = createFileRoute("/app/investor/profile")({
   beforeLoad: () => {
