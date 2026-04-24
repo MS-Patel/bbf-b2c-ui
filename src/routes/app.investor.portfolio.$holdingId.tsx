@@ -6,6 +6,7 @@ import {
   ArrowUpRight,
   CalendarDays,
   Compass,
+  FolderOpen,
   Repeat2,
   TrendingDown,
   TrendingUp,
@@ -19,6 +20,7 @@ import { ChartSkeleton } from "@/components/feedback/skeletons";
 import { StatusBadge, type StatusTone } from "@/components/feedback/status-badge";
 
 import { useHoldingsQuery } from "@/features/portfolio/api";
+import { HOLDING_TO_FOLIO } from "@/features/portfolio/fixtures";
 import { useTransactionsQuery } from "@/features/transactions/api";
 import { useAuthStore } from "@/stores/auth-store";
 import { ROLE_HOME } from "@/features/auth/role-routes";

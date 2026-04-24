@@ -30,6 +30,7 @@ import { Route as AppInvestorOrdersSwitchRouteImport } from './routes/app.invest
 import { Route as AppInvestorOrdersSipRouteImport } from './routes/app.investor.orders.sip'
 import { Route as AppInvestorOrdersRedeemRouteImport } from './routes/app.investor.orders.redeem'
 import { Route as AppInvestorOrdersLumpsumRouteImport } from './routes/app.investor.orders.lumpsum'
+import { Route as AppInvestorFoliosFolioNumberRouteImport } from './routes/app.investor.folios.$folioNumber'
 import { Route as AppInvestorExploreSchemeIdRouteImport } from './routes/app.investor.explore.$schemeId'
 
 const SignupRoute = SignupRouteImport.update({
@@ -139,6 +140,12 @@ const AppInvestorOrdersLumpsumRoute =
     path: '/investor/orders/lumpsum',
     getParentRoute: () => AppRoute,
   } as any)
+const AppInvestorFoliosFolioNumberRoute =
+  AppInvestorFoliosFolioNumberRouteImport.update({
+    id: '/investor/folios/$folioNumber',
+    path: '/investor/folios/$folioNumber',
+    getParentRoute: () => AppRoute,
+  } as any)
 const AppInvestorExploreSchemeIdRoute =
   AppInvestorExploreSchemeIdRouteImport.update({
     id: '/$schemeId',
@@ -164,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/app/investor/transactions': typeof AppInvestorTransactionsRoute
   '/app/investor/': typeof AppInvestorIndexRoute
   '/app/investor/explore/$schemeId': typeof AppInvestorExploreSchemeIdRoute
+  '/app/investor/folios/$folioNumber': typeof AppInvestorFoliosFolioNumberRoute
   '/app/investor/orders/lumpsum': typeof AppInvestorOrdersLumpsumRoute
   '/app/investor/orders/redeem': typeof AppInvestorOrdersRedeemRoute
   '/app/investor/orders/sip': typeof AppInvestorOrdersSipRoute
@@ -188,6 +196,7 @@ export interface FileRoutesByTo {
   '/app/investor/transactions': typeof AppInvestorTransactionsRoute
   '/app/investor': typeof AppInvestorIndexRoute
   '/app/investor/explore/$schemeId': typeof AppInvestorExploreSchemeIdRoute
+  '/app/investor/folios/$folioNumber': typeof AppInvestorFoliosFolioNumberRoute
   '/app/investor/orders/lumpsum': typeof AppInvestorOrdersLumpsumRoute
   '/app/investor/orders/redeem': typeof AppInvestorOrdersRedeemRoute
   '/app/investor/orders/sip': typeof AppInvestorOrdersSipRoute
@@ -213,6 +222,7 @@ export interface FileRoutesById {
   '/app/investor/transactions': typeof AppInvestorTransactionsRoute
   '/app/investor/': typeof AppInvestorIndexRoute
   '/app/investor/explore/$schemeId': typeof AppInvestorExploreSchemeIdRoute
+  '/app/investor/folios/$folioNumber': typeof AppInvestorFoliosFolioNumberRoute
   '/app/investor/orders/lumpsum': typeof AppInvestorOrdersLumpsumRoute
   '/app/investor/orders/redeem': typeof AppInvestorOrdersRedeemRoute
   '/app/investor/orders/sip': typeof AppInvestorOrdersSipRoute
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/app/investor/transactions'
     | '/app/investor/'
     | '/app/investor/explore/$schemeId'
+    | '/app/investor/folios/$folioNumber'
     | '/app/investor/orders/lumpsum'
     | '/app/investor/orders/redeem'
     | '/app/investor/orders/sip'
@@ -263,6 +274,7 @@ export interface FileRouteTypes {
     | '/app/investor/transactions'
     | '/app/investor'
     | '/app/investor/explore/$schemeId'
+    | '/app/investor/folios/$folioNumber'
     | '/app/investor/orders/lumpsum'
     | '/app/investor/orders/redeem'
     | '/app/investor/orders/sip'
@@ -287,6 +299,7 @@ export interface FileRouteTypes {
     | '/app/investor/transactions'
     | '/app/investor/'
     | '/app/investor/explore/$schemeId'
+    | '/app/investor/folios/$folioNumber'
     | '/app/investor/orders/lumpsum'
     | '/app/investor/orders/redeem'
     | '/app/investor/orders/sip'
@@ -451,6 +464,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInvestorOrdersLumpsumRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/investor/folios/$folioNumber': {
+      id: '/app/investor/folios/$folioNumber'
+      path: '/investor/folios/$folioNumber'
+      fullPath: '/app/investor/folios/$folioNumber'
+      preLoaderRoute: typeof AppInvestorFoliosFolioNumberRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/investor/explore/$schemeId': {
       id: '/app/investor/explore/$schemeId'
       path: '/$schemeId'
@@ -495,6 +515,7 @@ interface AppRouteChildren {
   AppInvestorTaxRoute: typeof AppInvestorTaxRoute
   AppInvestorTransactionsRoute: typeof AppInvestorTransactionsRoute
   AppInvestorIndexRoute: typeof AppInvestorIndexRoute
+  AppInvestorFoliosFolioNumberRoute: typeof AppInvestorFoliosFolioNumberRoute
   AppInvestorOrdersLumpsumRoute: typeof AppInvestorOrdersLumpsumRoute
   AppInvestorOrdersRedeemRoute: typeof AppInvestorOrdersRedeemRoute
   AppInvestorOrdersSipRoute: typeof AppInvestorOrdersSipRoute
@@ -513,6 +534,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppInvestorTaxRoute: AppInvestorTaxRoute,
   AppInvestorTransactionsRoute: AppInvestorTransactionsRoute,
   AppInvestorIndexRoute: AppInvestorIndexRoute,
+  AppInvestorFoliosFolioNumberRoute: AppInvestorFoliosFolioNumberRoute,
   AppInvestorOrdersLumpsumRoute: AppInvestorOrdersLumpsumRoute,
   AppInvestorOrdersRedeemRoute: AppInvestorOrdersRedeemRoute,
   AppInvestorOrdersSipRoute: AppInvestorOrdersSipRoute,
