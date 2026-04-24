@@ -1,5 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Lock, Palette, ShieldCheck, User as UserIcon } from "lucide-react";
+import { Lock, Palette, ShieldCheck, User as UserIcon, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +14,8 @@ import { PageHeader } from "@/components/layout/page-header";
 import { useAuthStore } from "@/stores/auth-store";
 import { useUiStore } from "@/stores/ui-store";
 import { ROLE_LABEL } from "@/features/auth/role-routes";
+import { useChangePasswordMutation } from "@/features/auth/api";
+import { passwordChangeSchema, type PasswordChangeFormValues } from "@/features/auth/schemas";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/app/settings")({
@@ -95,22 +99,23 @@ function SettingsPage() {
           </TabsContent>
 
           <TabsContent value="security" className="space-y-6">
+            <ChangePasswordCard />
+
             <Card className="shadow-card">
               <CardHeader>
-                <CardTitle>Password</CardTitle>
-                <CardDescription>Use a strong, unique password.</CardDescription>
+                <CardTitle>Two-factor authentication</CardTitle>
+                <CardDescription>Add a second layer of security to your account.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Field label="Current password" type="password" placeholder="••••••••" />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="New password" type="password" placeholder="At least 8 characters" />
-                  <Field label="Confirm password" type="password" />
-                </div>
-                <div className="flex justify-end">
-                  <Button onClick={() => toast.success("Password updated")}>Update password</Button>
-                </div>
+                <ToggleRow
+                  title="Authenticator app"
+                  description="Time-based codes via Google Authenticator or Authy."
+                />
+                <Separator />
+                <ToggleRow title="SMS OTP" description="Receive codes on your registered mobile." defaultChecked />
               </CardContent>
             </Card>
+          </TabsContent>
 
             <Card className="shadow-card">
               <CardHeader>
