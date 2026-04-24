@@ -160,3 +160,11 @@ export function useForgotPasswordMutation() {
 export function useLogoutMutation() {
   return useMutation({ mutationFn: () => authApi.logout() });
 }
+
+export function useChangePasswordMutation() {
+  return useMutation({ mutationFn: (p: PasswordChangePayload) => authApi.changePassword(p) });
+}
+
+export function useResetPasswordMutation() {
+  return useMutation({ mutationFn: (p: PasswordResetPayload) => authApi.resetPassword(p) });
+}
