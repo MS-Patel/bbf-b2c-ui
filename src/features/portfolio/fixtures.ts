@@ -1,5 +1,8 @@
 import type {
   AllocationSlice,
+  FolioDetail,
+  FolioRecentTxn,
+  FolioSummary,
   Holding,
   PerformancePoint,
   PortfolioOverview,
