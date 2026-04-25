@@ -1,7 +1,11 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, redirect } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format as formatDateFns } from "date-fns";
 import {
   BarChart3,
+  CalendarIcon,
   Calculator,
   Download,
   FileSpreadsheet,
@@ -25,6 +29,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { TableSkeleton } from "@/components/feedback/skeletons";
 import { StatusBadge, type StatusTone } from "@/components/feedback/status-badge";
 import { DataTable, type DataTableColumn } from "@/components/data/data-table";
@@ -32,6 +46,7 @@ import { DataTable, type DataTableColumn } from "@/components/data/data-table";
 import { useAuthStore } from "@/stores/auth-store";
 import { ROLE_HOME } from "@/features/auth/role-routes";
 import { useReportJobsQuery, useRequestReportMutation } from "@/features/reports/api";
+import { reportRequestSchema, type ReportRequestFormValues } from "@/features/reports/schemas";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { ReportFormat, ReportJob, ReportKind, ReportPeriod } from "@/types/reports";
