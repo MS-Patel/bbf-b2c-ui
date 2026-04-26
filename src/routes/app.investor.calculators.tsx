@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useForm, type UseFormReturn, type FieldValues, type Path } from "react-hook-form";
+import { useForm, type UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Calculator,
@@ -158,9 +158,12 @@ function Stat({
   );
 }
 
-interface NumberFieldProps<T extends FieldValues> {
-  form: UseFormReturn<T>;
-  name: Path<T>;
+interface NumberFieldProps {
+  // Using `any` here intentionally — the helper is shared across multiple form schemas
+  // and the strict generic plumbing fights React Hook Form's covariance.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: UseFormReturn<any>;
+  name: string;
   label: string;
   hint?: string;
   min?: number;
@@ -169,7 +172,7 @@ interface NumberFieldProps<T extends FieldValues> {
   suffix?: string;
 }
 
-function NumberField<T extends FieldValues>({
+function NumberField({
   form,
   name,
   label,
@@ -178,7 +181,7 @@ function NumberField<T extends FieldValues>({
   max,
   step,
   suffix,
-}: NumberFieldProps<T>) {
+}: NumberFieldProps) {
   return (
     <FormField
       control={form.control}
