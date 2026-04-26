@@ -4,7 +4,7 @@ export const sipCalculatorSchema = z.object({
   monthly: z.number({ error: "Enter monthly amount" }).min(500, "Min ₹500").max(10_000_000),
   annualReturn: z.number({ error: "Enter expected return" }).min(1, "Min 1%").max(30, "Max 30%"),
   years: z.number({ error: "Enter tenure" }).int("Whole years").min(1, "Min 1 yr").max(40, "Max 40 yrs"),
-  stepUp: z.number().min(0).max(50).optional().default(0),
+  stepUp: z.number().min(0).max(50),
 });
 
 export const lumpsumCalculatorSchema = z.object({
@@ -17,7 +17,7 @@ export const goalSipCalculatorSchema = z.object({
   target: z.number({ error: "Enter target corpus" }).min(10_000).max(1_000_000_000),
   years: z.number({ error: "Enter tenure" }).int().min(1).max(40),
   annualReturn: z.number({ error: "Enter expected return" }).min(1).max(30),
-  currentSavings: z.number().min(0).optional().default(0),
+  currentSavings: z.number().min(0),
 });
 
 export const retirementSchema = z
