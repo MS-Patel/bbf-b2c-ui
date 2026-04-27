@@ -86,7 +86,13 @@ function SipCalculatorPage() {
                       <FormItem>
                         <FormLabel>Monthly investment (₹)</FormLabel>
                         <FormControl>
-                          <Input type="number" min={100} step={100} {...field} />
+                          <Input
+                            type="number"
+                            min={100}
+                            step={100}
+                            value={field.value ?? ""}
+                            onChange={(e) => field.onChange(e.target.value === "" ? undefined : Number(e.target.value))}
+                          />
                         </FormControl>
                         <Slider
                           value={[Number(field.value) || 0]}
@@ -108,7 +114,14 @@ function SipCalculatorPage() {
                       <FormItem>
                         <FormLabel>Expected return (% p.a.)</FormLabel>
                         <FormControl>
-                          <Input type="number" min={1} max={40} step={0.5} {...field} />
+                          <Input
+                            type="number"
+                            min={1}
+                            max={40}
+                            step={0.5}
+                            value={field.value ?? ""}
+                            onChange={(e) => field.onChange(e.target.value === "" ? undefined : Number(e.target.value))}
+                          />
                         </FormControl>
                         <Slider
                           value={[Number(field.value) || 0]}
@@ -130,7 +143,14 @@ function SipCalculatorPage() {
                       <FormItem>
                         <FormLabel>Time period (years)</FormLabel>
                         <FormControl>
-                          <Input type="number" min={1} max={40} step={1} {...field} />
+                          <Input
+                            type="number"
+                            min={1}
+                            max={40}
+                            step={1}
+                            value={field.value ?? ""}
+                            onChange={(e) => field.onChange(e.target.value === "" ? undefined : Number(e.target.value))}
+                          />
                         </FormControl>
                         <Slider
                           value={[Number(field.value) || 0]}
