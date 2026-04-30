@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AllocationDonut } from "@/features/portfolio/components/allocation-donut";
 import { useCASStore } from "@/features/cas/store";
-import { CAS_FIXTURE_ASSETS, buildParseResult } from "@/features/cas/fixtures";
+import { buildParseResult } from "@/features/cas/fixtures";
 import type { AssetKind, CASAsset, CASParseResult } from "@/features/cas/types";
 import type { AllocationSlice } from "@/types/portfolio";
 import { formatCompactINR, formatINR, formatPercent } from "@/lib/format";
@@ -297,5 +297,3 @@ function subtitleOf(a: CASAsset): string {
   }
 }
 
-// silence unused (CAS_FIXTURE_ASSETS imported only to keep tree-shaking happy if user clears import)
-void CAS_FIXTURE_ASSETS;
