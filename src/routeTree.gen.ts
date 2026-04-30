@@ -31,7 +31,9 @@ import { Route as AppInvestorSipsRouteImport } from './routes/app.investor.sips'
 import { Route as AppInvestorReportsRouteImport } from './routes/app.investor.reports'
 import { Route as AppInvestorProfileRouteImport } from './routes/app.investor.profile'
 import { Route as AppInvestorPortfolioRouteImport } from './routes/app.investor.portfolio'
+import { Route as AppInvestorInvestmentsRouteImport } from './routes/app.investor.investments'
 import { Route as AppInvestorInsightsRouteImport } from './routes/app.investor.insights'
+import { Route as AppInvestorImportRouteImport } from './routes/app.investor.import'
 import { Route as AppInvestorGoalsRouteImport } from './routes/app.investor.goals'
 import { Route as AppInvestorExploreRouteImport } from './routes/app.investor.explore'
 import { Route as AppInvestorCalculatorsRouteImport } from './routes/app.investor.calculators'
@@ -153,9 +155,19 @@ const AppInvestorPortfolioRoute = AppInvestorPortfolioRouteImport.update({
   path: '/investor/portfolio',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInvestorInvestmentsRoute = AppInvestorInvestmentsRouteImport.update({
+  id: '/investor/investments',
+  path: '/investor/investments',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInvestorInsightsRoute = AppInvestorInsightsRouteImport.update({
   id: '/investor/insights',
   path: '/investor/insights',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInvestorImportRoute = AppInvestorImportRouteImport.update({
+  id: '/investor/import',
+  path: '/investor/import',
   getParentRoute: () => AppRoute,
 } as any)
 const AppInvestorGoalsRoute = AppInvestorGoalsRouteImport.update({
@@ -231,7 +243,9 @@ export interface FileRoutesByFullPath {
   '/app/investor/calculators': typeof AppInvestorCalculatorsRoute
   '/app/investor/explore': typeof AppInvestorExploreRouteWithChildren
   '/app/investor/goals': typeof AppInvestorGoalsRoute
+  '/app/investor/import': typeof AppInvestorImportRoute
   '/app/investor/insights': typeof AppInvestorInsightsRoute
+  '/app/investor/investments': typeof AppInvestorInvestmentsRoute
   '/app/investor/portfolio': typeof AppInvestorPortfolioRouteWithChildren
   '/app/investor/profile': typeof AppInvestorProfileRoute
   '/app/investor/reports': typeof AppInvestorReportsRoute
@@ -266,7 +280,9 @@ export interface FileRoutesByTo {
   '/app/investor/calculators': typeof AppInvestorCalculatorsRoute
   '/app/investor/explore': typeof AppInvestorExploreRouteWithChildren
   '/app/investor/goals': typeof AppInvestorGoalsRoute
+  '/app/investor/import': typeof AppInvestorImportRoute
   '/app/investor/insights': typeof AppInvestorInsightsRoute
+  '/app/investor/investments': typeof AppInvestorInvestmentsRoute
   '/app/investor/portfolio': typeof AppInvestorPortfolioRouteWithChildren
   '/app/investor/profile': typeof AppInvestorProfileRoute
   '/app/investor/reports': typeof AppInvestorReportsRoute
@@ -302,7 +318,9 @@ export interface FileRoutesById {
   '/app/investor/calculators': typeof AppInvestorCalculatorsRoute
   '/app/investor/explore': typeof AppInvestorExploreRouteWithChildren
   '/app/investor/goals': typeof AppInvestorGoalsRoute
+  '/app/investor/import': typeof AppInvestorImportRoute
   '/app/investor/insights': typeof AppInvestorInsightsRoute
+  '/app/investor/investments': typeof AppInvestorInvestmentsRoute
   '/app/investor/portfolio': typeof AppInvestorPortfolioRouteWithChildren
   '/app/investor/profile': typeof AppInvestorProfileRoute
   '/app/investor/reports': typeof AppInvestorReportsRoute
@@ -339,7 +357,9 @@ export interface FileRouteTypes {
     | '/app/investor/calculators'
     | '/app/investor/explore'
     | '/app/investor/goals'
+    | '/app/investor/import'
     | '/app/investor/insights'
+    | '/app/investor/investments'
     | '/app/investor/portfolio'
     | '/app/investor/profile'
     | '/app/investor/reports'
@@ -374,7 +394,9 @@ export interface FileRouteTypes {
     | '/app/investor/calculators'
     | '/app/investor/explore'
     | '/app/investor/goals'
+    | '/app/investor/import'
     | '/app/investor/insights'
+    | '/app/investor/investments'
     | '/app/investor/portfolio'
     | '/app/investor/profile'
     | '/app/investor/reports'
@@ -409,7 +431,9 @@ export interface FileRouteTypes {
     | '/app/investor/calculators'
     | '/app/investor/explore'
     | '/app/investor/goals'
+    | '/app/investor/import'
     | '/app/investor/insights'
+    | '/app/investor/investments'
     | '/app/investor/portfolio'
     | '/app/investor/profile'
     | '/app/investor/reports'
@@ -598,11 +622,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInvestorPortfolioRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/investor/investments': {
+      id: '/app/investor/investments'
+      path: '/investor/investments'
+      fullPath: '/app/investor/investments'
+      preLoaderRoute: typeof AppInvestorInvestmentsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/investor/insights': {
       id: '/app/investor/insights'
       path: '/investor/insights'
       fullPath: '/app/investor/insights'
       preLoaderRoute: typeof AppInvestorInsightsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/investor/import': {
+      id: '/app/investor/import'
+      path: '/investor/import'
+      fullPath: '/app/investor/import'
+      preLoaderRoute: typeof AppInvestorImportRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/investor/goals': {
@@ -706,7 +744,9 @@ interface AppRouteChildren {
   AppInvestorCalculatorsRoute: typeof AppInvestorCalculatorsRoute
   AppInvestorExploreRoute: typeof AppInvestorExploreRouteWithChildren
   AppInvestorGoalsRoute: typeof AppInvestorGoalsRoute
+  AppInvestorImportRoute: typeof AppInvestorImportRoute
   AppInvestorInsightsRoute: typeof AppInvestorInsightsRoute
+  AppInvestorInvestmentsRoute: typeof AppInvestorInvestmentsRoute
   AppInvestorPortfolioRoute: typeof AppInvestorPortfolioRouteWithChildren
   AppInvestorProfileRoute: typeof AppInvestorProfileRoute
   AppInvestorReportsRoute: typeof AppInvestorReportsRoute
@@ -728,7 +768,9 @@ const AppRouteChildren: AppRouteChildren = {
   AppInvestorCalculatorsRoute: AppInvestorCalculatorsRoute,
   AppInvestorExploreRoute: AppInvestorExploreRouteWithChildren,
   AppInvestorGoalsRoute: AppInvestorGoalsRoute,
+  AppInvestorImportRoute: AppInvestorImportRoute,
   AppInvestorInsightsRoute: AppInvestorInsightsRoute,
+  AppInvestorInvestmentsRoute: AppInvestorInvestmentsRoute,
   AppInvestorPortfolioRoute: AppInvestorPortfolioRouteWithChildren,
   AppInvestorProfileRoute: AppInvestorProfileRoute,
   AppInvestorReportsRoute: AppInvestorReportsRoute,
